@@ -398,8 +398,7 @@ function handleCollisions() {
       enemy.hp = 0;
       addBurst(enemy.x, enemy.y, "#ff6f91");
       shake = 14;
-      score = Math.max(0, score - 90);
-      player.invincible = 1.4;
+      crashPlayer();
     }
   });
 
@@ -416,11 +415,14 @@ function handleCollisions() {
     if (player.invincible <= 0 && circleHit(bullet, player)) {
       bullet.y = H + 99;
       shake = 12;
-      score = Math.max(0, score - 60);
-      player.invincible = 1.25;
-      addBurst(player.x, player.y, "#ffcf5a");
+      crashPlayer();
     }
   });
+}
+
+function crashPlayer() {
+  addBurst(player.x, player.y, "#ffcf5a");
+  endGame();
 }
 
 function circleHit(a, b) {
